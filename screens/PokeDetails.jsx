@@ -7,6 +7,8 @@ const PokeDetails = ({ navigation }) => {
     const { isFetching, error, isError, data, status, pokemonInfo } =
         usePokeFetch();
 
+
+    status === 'success' && console.log('pokeInfo: ', pokemonInfo)
     if (isFetching) {
         return <Text>Loading</Text>;
     }
