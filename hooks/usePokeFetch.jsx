@@ -42,6 +42,16 @@ export const usePokeFetch = () => {
         return nameCapitalized;
     }
 
+    function getAbilitiesCapitalized() {
+        const abilities  = getAbilities()
+        // converting first letter to uppercase
+        const abilitiesCapitalized = abilities.map(elem =>{
+            return elem.charAt(0).toUpperCase() + elem.slice(1);
+        })
+        
+        return abilitiesCapitalized;
+    }
+
     let pokemonInfo = {};
 
     if (data && status === 'success') {
@@ -54,7 +64,7 @@ export const usePokeFetch = () => {
             info: {
                 weight: data.weight,
                 height: data.height,
-                abilities: getAbilities(),
+                abilities: getAbilitiesCapitalized(),
             },
             // description: 'Lorem ipsum',
             stats: getStats(),

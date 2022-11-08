@@ -26,17 +26,37 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import PokeDetails from './screens/PokeDetails';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+    useFonts,
+    Poppins_300Light,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+} from '@expo-google-fonts/poppins';
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 
 function App() {
+    let [fontsLoaded] = useFonts({
+        Poppins_300Light,
+        Poppins_400Regular,
+        Poppins_500Medium,
+        Poppins_600SemiBold,
+        Poppins_700Bold,
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
     return (
         <QueryClientProvider client={queryClient}>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Home">
-                    <Stack.Screen name="Home" component={HomeScreen} />
-                    <Stack.Screen name="PokeDetails" component={PokeDetails} />
+                <Stack.Navigator initialRouteName='Home'>
+                    <Stack.Screen name='Home' component={HomeScreen} />
+                    <Stack.Screen name='PokeDetails' component={PokeDetails} />
                 </Stack.Navigator>
             </NavigationContainer>
         </QueryClientProvider>

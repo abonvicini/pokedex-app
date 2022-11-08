@@ -24,7 +24,7 @@ const PokeCard = ({ item }) => {
             <Image style={{width: 200, height: 200}} source={{uri: `${item.imageArtWork}`}} />
 
             <View style={styles.typesContainer}>{renderTypes()}</View>
-            <Text>{item.title}</Text>
+            <Text style={styles.titleText}>{item.title}</Text>
             <View style={styles.infoWrapper}>
             <View style={styles.infoContainer}>
                 {/* FALTA ICONO */}
@@ -33,7 +33,7 @@ const PokeCard = ({ item }) => {
                     <View style={styles.gapper8} />
                     <Text style={styles.text}>{item.info.weight / 10} kg</Text>
                 </View>
-                <Text style={styles.text}>Weight</Text>
+                <Text style={[styles.text, styles.textDetails]}>Weight</Text>
             </View>
             <View style={styles.divider24}/>
             <View style={styles.infoContainer}>
@@ -43,7 +43,7 @@ const PokeCard = ({ item }) => {
                     <View style={styles.gapper8} />
                     <Text style={styles.text}>{item.info.height / 10} m</Text>
                 </View>
-                <Text style={styles.text}>Height</Text>
+                <Text style={[styles.text, styles.textDetails]}>Height</Text>
             </View>
             <View style={styles.divider24}/>
             <View style={styles.infoContainer}>
@@ -52,7 +52,7 @@ const PokeCard = ({ item }) => {
                 {renderAbilities()}
         
                 </View>
-                <Text style={styles.text}>Abilities</Text>
+                <Text style={[styles.text, styles.textDetails]}>Abilities</Text>
                 {/* FALTA ICONO */}
             </View>
             </View>
@@ -61,8 +61,23 @@ const PokeCard = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
+    titleText: {
+        color: 'tomato',
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 16,
+        fontStyle: 'normal'
+
+    },
     text: {
-        color: 'white'
+        fontStyle: 'normal',
+        fontSize: 12,
+        color: '#212121',
+        fontFamily: 'Poppins_400Regular'
+    },
+    textDetails: {
+        fontSize: 10,
+        color: '#666666'
+
     },
     cardContainer: {
         display: 'flex',
@@ -113,8 +128,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 0,
-        height: 90,
-        // borderWidth: 1,
+        height: 65,
+        borderWidth: 1,
    },
     infoDetails: {
         display: 'flex',
@@ -125,7 +140,8 @@ const styles = StyleSheet.create({
         // borderColor: 'tomato',
     },
     infoAbilities: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        paddingVertical: 0
     },
     gapper8: {
         marginHorizontal: 4,
@@ -144,7 +160,7 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         // borderColor: 'green',
         borderRadius: 10,
-        backgroundColor: 'rgba(0, 6, 144, 0.55)',
+        // backgroundColor: 'rgba(0, 6, 144, 0.55)',
         paddingHorizontal: 8,
         paddingVertical: 6
     }
