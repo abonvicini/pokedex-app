@@ -74,16 +74,15 @@ const PokeCard = ({ item }) => {
                 style={styles.pokeImage}
                 source={{ uri: `${item.imageArtWork}` }}
             />
+
+            <View style={styles.typesContainer}>{renderTypes()}</View>
+
+            <View style={styles.divider} />
             <View style={styles.titleWrapper}>
                 <Text style={styles.titleText(typesColors[item.types[0]])}>
                     {item.title}
                 </Text>
             </View>
-
-            <View style={styles.divider} />
-
-            <View style={styles.typesContainer}>{renderTypes()}</View>
-
             <View style={styles.divider} />
 
             <View style={styles.infoWrapper}>
@@ -187,6 +186,7 @@ const PokeCard = ({ item }) => {
                         color={typesColors[item.types[0]]}
                     />
                     <ProgressBarAndroid
+                        animating={true}
                         styleAttr="Horizontal"
                         indeterminate={false}
                         progress={item.stats.defense / 100}
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
         /* Type - Water */
 
         backgroundColor: color,
-        borderRadius: 10,
+        borderRadius: 20,
     }),
 
     infoWrapper: {

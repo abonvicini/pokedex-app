@@ -3,9 +3,11 @@ import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import PokeCard, { typesColors } from '../components/PokeCard';
 import { usePokeFetch } from '../hooks/usePokeFetch';
 
-const PokeDetails = ({ navigation }) => {
+const PokeDetails = ({ route, navigation }) => {
+    const { pokeName } = route.params;
+    console.log('pokeName', pokeName);
     const { isFetching, error, isError, data, status, pokemonInfo } =
-        usePokeFetch();
+        usePokeFetch(pokeName);
 
     status === 'success' && console.log('pokeInfo: ', data.types[0]);
     if (isFetching) {

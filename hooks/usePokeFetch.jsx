@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPokemon } from '../lib/api';
 
 //useQuery hook
-export const usePokeFetch = () => {
+export const usePokeFetch = (pokeName) => {
     const { isFetching, error, isError, data, status } = useQuery({
-        queryKey: ['pokemon'],
-        queryFn: fetchPokemon,
+        queryKey: ['pokemon', pokeName],
+        // queryFn: fetchPokemon,
+        queryFn: () => fetchPokemon(pokeName),
     });
 
     const getAbilities = () => {
