@@ -43,12 +43,12 @@ export const usePokeFetch = () => {
     }
 
     function getAbilitiesCapitalized() {
-        const abilities  = getAbilities()
+        const abilities = getAbilities();
         // converting first letter to uppercase
-        const abilitiesCapitalized = abilities.map(elem =>{
+        const abilitiesCapitalized = abilities.map((elem) => {
             return elem.charAt(0).toUpperCase() + elem.slice(1);
-        })
-        
+        });
+
         return abilitiesCapitalized;
     }
 
