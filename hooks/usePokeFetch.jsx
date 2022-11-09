@@ -52,6 +52,17 @@ export const usePokeFetch = () => {
         return abilitiesCapitalized;
     }
 
+    function getStatsCapitalized() {
+        const typesList = getTypes();
+        console.log(typesList);
+        // converting first letter to uppercase
+        const typesCapitalized = typesList.map((elem) => {
+            return elem.charAt(0).toUpperCase() + elem.slice(1);
+        });
+
+        return typesCapitalized;
+    }
+
     let pokemonInfo = {};
 
     if (data && status === 'success') {
@@ -59,7 +70,7 @@ export const usePokeFetch = () => {
             name: getNameCapitalized(),
             id: data.id,
             order: data.order,
-            types: getTypes(),
+            types: getStatsCapitalized(),
             title: 'About',
             info: {
                 weight: data.weight,
@@ -69,6 +80,7 @@ export const usePokeFetch = () => {
             // description: 'Lorem ipsum',
             stats: getStats(),
             imageArtWork: data.sprites.other['official-artwork'].front_default,
+            color: 'cadetblue',
         };
     }
 

@@ -1,43 +1,50 @@
 import React from 'react';
-import { Button, Image, Text, View } from 'react-native';
-import PokeCard from '../components/PokeCard';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import PokeCard, { typesColors } from '../components/PokeCard';
 import { usePokeFetch } from '../hooks/usePokeFetch';
 
 const PokeDetails = ({ navigation }) => {
     const { isFetching, error, isError, data, status, pokemonInfo } =
         usePokeFetch();
 
-
-    status === 'success' && console.log('pokeInfo: ', pokemonInfo)
+    status === 'success' && console.log('pokeInfo: ', data.types[0]);
     if (isFetching) {
         return <Text>Loading</Text>;
     }
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
-            <Text
-                style={{
-                    marginTop: 10,
-                    marginBottom: 10,
-                }}
-            >
-                Pokemon Details
-            </Text>
+        <View style={styles.pageContainer(typesColors[pokemonInfo.types[0]])}>
+            <Image
+                style={styles.pokeImage}
+                source={require('../img/pokeball.png')}
+            />
             <PokeCard item={pokemonInfo} />
 
-            <Button
+            {/* <Button
                 title="Return to Home"
                 color="tomato"
                 onPress={() => navigation.goBack()}
-            />
+            /> */}
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    pageContainer: (colorBase) => ({
+        display: 'flex',
+
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colorBase,
+    }),
+    pokeImage: {
+        width: 208,
+        height: 208,
+        // position: 'absolute',
+        marginVertical: 10,
+        alignSelf: 'flex-end',
+    },
+});
 
 export default PokeDetails;

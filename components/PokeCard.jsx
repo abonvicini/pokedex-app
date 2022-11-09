@@ -7,15 +7,37 @@ import {
     View,
 } from 'react-native';
 // import { ProgressBarAndroid } from 'react-native-community/progress-bar-android';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+
+export const typesColors = {
+    Rock: '#B69E31',
+    Ghost: '#70559B',
+    Steel: '#B7B9D0',
+    Water: '#6493EB',
+    Grass: '#74CB48',
+    Psychic: '#FB5584',
+    Ice: '#9AD6DF',
+    Dark: '#75574C',
+    Fairy: '#E69EAC',
+    Normal: '#AAA67F',
+    Fighting: '#C12239',
+    Flying: '#A891EC',
+    Poison: '#A43E9E',
+    Ground: '#DEC16B',
+    Bug: '#A7B723',
+    Fire: '#F57D31',
+    Electric: '#F9CF30',
+    Dragon: '#7037FF',
+};
 
 const PokeCard = ({ item }) => {
     const renderTypes = () => {
-        return item.types.map((type) => {
+        return item.types.map((type, index) => {
             return (
-                <Text style={styles.typeBox} key={type}>
+                <Text
+                    style={styles.typeBox(typesColors[item.types[index]])}
+                    key={type}
+                >
                     {type}
                 </Text>
             );
@@ -48,12 +70,14 @@ const PokeCard = ({ item }) => {
     return (
         <View style={styles.cardContainer}>
             {/* <Text>PokeCard</Text> */}
-            {/* <Image
-                style={{ width: 200, height: 200 }}
+            <Image
+                style={styles.pokeImage}
                 source={{ uri: `${item.imageArtWork}` }}
-            /> */}
+            />
             <View style={styles.titleWrapper}>
-                <Text style={styles.titleText}>{item.title}</Text>
+                <Text style={styles.titleText(typesColors[item.types[0]])}>
+                    {item.title}
+                </Text>
             </View>
 
             <View style={styles.divider} />
@@ -108,19 +132,45 @@ const PokeCard = ({ item }) => {
             <View style={styles.divider} />
 
             <View style={styles.titleWrapper}>
-                <Text style={styles.titleText}>Base Stats</Text>
+                <Text style={styles.titleText(typesColors[item.types[0]])}>
+                    Base Stats
+                </Text>
             </View>
 
             <View style={styles.divider} />
 
             <View style={styles.baseStatsWrapper}>
                 <View style={styles.verticalContainer}>
-                    <Text style={styles.baseStatsText}>ATK</Text>
-                    <Text style={styles.baseStatsText}>DEF</Text>
-                    <Text style={styles.baseStatsText}>HP</Text>
-                    <Text style={styles.baseStatsText}>SATK</Text>
-                    <Text style={styles.baseStatsText}>SDEF</Text>
-                    <Text style={styles.baseStatsText}>SPD</Text>
+                    <Text
+                        style={styles.baseStatsText(typesColors[item.types[0]])}
+                    >
+                        ATK
+                    </Text>
+                    <Text
+                        style={styles.baseStatsText(typesColors[item.types[0]])}
+                    >
+                        DEF
+                    </Text>
+                    <Text
+                        style={styles.baseStatsText(typesColors[item.types[0]])}
+                    >
+                        HP
+                    </Text>
+                    <Text
+                        style={styles.baseStatsText(typesColors[item.types[0]])}
+                    >
+                        SATK
+                    </Text>
+                    <Text
+                        style={styles.baseStatsText(typesColors[item.types[0]])}
+                    >
+                        SDEF
+                    </Text>
+                    <Text
+                        style={styles.baseStatsText(typesColors[item.types[0]])}
+                    >
+                        SPD
+                    </Text>
                 </View>
                 <View style={styles.gapper8} />
                 <View style={styles.slimGrayVertical} />
@@ -129,14 +179,43 @@ const PokeCard = ({ item }) => {
                 {renderStats()}
                 <View style={styles.gapper8} />
 
-                <View style={styles.verticalContainer}>
-                    <View style={styles.example}>
-                        <ProgressBarAndroid
-                            styleAttr="Horizontal"
-                            indeterminate={false}
-                            progress={item.stats.attack / 100}
-                        />
-                    </View>
+                <View style={[styles.verticalContainer, styles.progressBar]}>
+                    <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.stats.attack / 100}
+                        color={typesColors[item.types[0]]}
+                    />
+                    <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.stats.defense / 100}
+                        color={typesColors[item.types[0]]}
+                    />
+                    <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.stats.hp / 100}
+                        color={typesColors[item.types[0]]}
+                    />
+                    <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.stats['special-attack'] / 100}
+                        color={typesColors[item.types[0]]}
+                    />
+                    <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.stats['special-defense'] / 100}
+                        color={typesColors[item.types[0]]}
+                    />
+                    <ProgressBarAndroid
+                        styleAttr="Horizontal"
+                        indeterminate={false}
+                        progress={item.stats.speed / 100}
+                        color={typesColors[item.types[0]]}
+                    />
                 </View>
             </View>
         </View>
@@ -144,12 +223,26 @@ const PokeCard = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
-    example: {
-        marginVertical: 24,
+    pokeImage: {
+        width: 200,
+        height: 200,
+        position: 'absolute',
+        // left: '25%',
+        // marginLeft: ,
+        top: -150,
     },
+    progressBar: {
+        // width: 'auto',
+        alignItems: 'stretch',
+        display: 'flex',
+        flexGrow: 1,
+        borderRadius: 1,
+        // height: 45,
+    },
+
     titleWrapper: {
-        borderWidth: 1,
-        borderColor: 'yellow',
+        // borderWidth: 1,
+        // borderColor: 'yellow',
 
         display: 'flex',
         flexDirection: 'row',
@@ -157,20 +250,20 @@ const styles = StyleSheet.create({
         height: 25,
         justifyContent: 'center',
     },
-    titleText: {
-        color: 'tomato',
+    titleText: (color) => ({
+        color: color,
         fontFamily: 'Poppins_700Bold',
         lineHeight: 20,
         fontSize: 16,
         fontStyle: 'normal',
-        borderWidth: 1,
-        borderColor: 'green',
+        // borderWidth: 1,
+        // borderColor: 'green',
         textAlign: 'center',
         textAlignVertical: 'center',
-    },
-    baseStatsText: {
+    }),
+    baseStatsText: (color) => ({
         alignSelf: 'flex-end',
-        color: 'tomato',
+        color: color,
         fontFamily: 'Poppins_700Bold',
         lineHeight: 18,
         fontSize: 12,
@@ -178,7 +271,7 @@ const styles = StyleSheet.create({
 
         // textAlign: 'right',
         textAlignVertical: 'center',
-    },
+    }),
     text: {
         fontStyle: 'normal',
         fontSize: 12,
@@ -195,18 +288,20 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: '100%',
-        height: 412,
+        width: '96%',
+        // height: 412,
         backgroundColor: 'azure',
-        borderWidth: 2,
-        borderColor: 'cadetblue',
+        // borderWidth: 2,
+        // borderColor: 'cadetblue',
         borderRadius: 8,
         paddingTop: 50,
+        paddingBottom: 30,
+        // marginBottom: 25,
     },
     typesContainer: {
-        borderWidth: 1,
-        borderColor: 'tomato',
-        // backgroundColor: 'tomato',
+        // borderWidth: 1,
+        // borderColor: '#74CB48',
+        // backgroundColor: '#74CB48',
         display: 'flex',
         flexDirection: 'row',
         alignSelf: 'center',
@@ -215,10 +310,11 @@ const styles = StyleSheet.create({
         width: 200,
         height: 'auto',
     },
-    typeBox: {
-        fontFamily: 'Roboto',
+    typeBox: (color) => ({
+        fontFamily: 'Poppins_700Bold',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         fontSize: 12,
         lineHeight: 18,
         textAlignVertical: 'center',
@@ -232,13 +328,13 @@ const styles = StyleSheet.create({
 
         /* Type - Water */
 
-        backgroundColor: '#6493EB',
+        backgroundColor: color,
         borderRadius: 10,
-    },
+    }),
 
     infoWrapper: {
-        borderWidth: 1,
-        borderColor: 'blue',
+        // borderWidth: 1,
+        // borderColor: 'blue',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -267,7 +363,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         paddingVertical: 10,
         // borderWidth: 1,
-        // borderColor: 'tomato',
+        // borderColor: '#74CB48',
     },
     infoAbilities: {
         flexDirection: 'column',
@@ -285,8 +381,8 @@ const styles = StyleSheet.create({
     divider: {
         height: 16,
         width: '100%',
-        borderWidth: 0.5,
-        borderColor: 'purple',
+        // borderWidth: 0.5,
+        // borderColor: 'purple',
     },
 
     baseStatsWrapper: {
@@ -294,16 +390,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         width: 320,
-        borderWidth: 0.5,
-        borderColor: 'tomato',
+        // borderWidth: 0.5,
+        // borderColor: '#74CB48',
         // height: 100,
     },
     verticalContainer: {
+        height: 100,
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'space-evenly',
         alignItems: 'flex-start',
-        borderWidth: 0.5,
-        borderColor: 'blue',
     },
 });
 
