@@ -83,6 +83,7 @@ export const usePokeFetch = (pokeName) => {
             imageArtWork: data.sprites.other['official-artwork'].front_default,
             color: 'cadetblue',
         };
+        console.log('imageArtWork: ', pokemonInfo.imageArtWork);
     }
 
     return {
