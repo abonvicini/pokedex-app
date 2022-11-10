@@ -55,7 +55,7 @@ export const usePokeFetch = (pokeName) => {
 
     function getStatsCapitalized() {
         const typesList = getTypes();
-        console.log(typesList);
+        // console.log(typesList);
         // converting first letter to uppercase
         const typesCapitalized = typesList.map((elem) => {
             return elem.charAt(0).toUpperCase() + elem.slice(1);
@@ -83,7 +83,7 @@ export const usePokeFetch = (pokeName) => {
             imageArtWork: data.sprites.other['official-artwork'].front_default,
             color: 'cadetblue',
         };
-        console.log('imageArtWork: ', pokemonInfo.imageArtWork);
+        // console.log('imageArtWork: ', pokemonInfo.imageArtWork);
     }
 
     return {
