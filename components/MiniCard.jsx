@@ -8,12 +8,12 @@ import {
 } from 'react-native';
 import { typesColors } from './PokeCard';
 
-const MiniCard = ({ item, nav }) => {
+const MiniCard = ({ item, navigation }) => {
     return (
         <TouchableHighlight
             activeOpacity={0.5}
             underlayColor={'#EEEEEE'}
-            onPress={() => nav.navigate('PokeDetails', { pokeName: item.name })}
+            onPress={() => navigation.navigate('PokeDetails', { pokeName: item.name })}
             style={styles.miniCardContainer(typesColors[item.types[0]])}
         >
             <View>
