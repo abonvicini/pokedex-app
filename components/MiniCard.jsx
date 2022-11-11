@@ -1,19 +1,30 @@
 import React from 'react';
 import {
+    Alert,
     Image,
     StyleSheet,
     Text,
     TouchableHighlight,
     View,
 } from 'react-native';
+import UserCtx from '../contexts/userCtx';
 import { typesColors } from './PokeCard';
 
 const MiniCard = ({ item, navigation }) => {
+    const { user } = React.useContext(UserCtx);
+    const handleNavigate = () => {
+        navigation.navigate('PokeDetails', { pokeName: item.name });
+    };
+
+    const handleNotLogged = () => {
+        Alert.alert('Para ver detalles de un Pokémon, primero debes logearte.');
+    };
+
     return (
         <TouchableHighlight
             activeOpacity={0.5}
             underlayColor={'#EEEEEE'}
-            onPress={() => navigation.navigate('PokeDetails', { pokeName: item.name })}
+            onPress={user ? handleNavigate : handleNotLogged}
             style={styles.miniCardContainer(typesColors[item.types[0]])}
         >
             <View>

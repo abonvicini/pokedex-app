@@ -4,7 +4,8 @@ import PokeCard, { typesColors } from '../components/PokeCard';
 import { usePokeFetch } from '../hooks/usePokeFetch';
 
 const PokeDetails = ({ route, navigation }) => {
-    const { pokeName } = route.params;
+    const fallback = { pokeName: 1 };
+    const { pokeName } = route.params || fallback;
     console.log('pokeName', pokeName);
     const { isFetching, error, isError, data, status, pokemonInfo } =
         usePokeFetch(pokeName);
