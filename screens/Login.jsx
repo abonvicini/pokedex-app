@@ -110,59 +110,60 @@ const Login = ({ navigation }) => {
                 isValidating,
             }) => (
                 <View style={styles.container}>
-                    {isSubmitting ? (
-                        <ActivityIndicator />
+                    {!user ? (
+                        <View>
+                            {isSubmitting ? (
+                                <ActivityIndicator />
+                            ) : (
+                                <>
+                                    <TextInput
+                                        // style={styles.input}
+                                        placeholder="Ingrese email..."
+                                        placeholderTextColor={'darkslategray'}
+                                        onChangeText={handleChange('email')}
+                                        name="email"
+                                        value={values.email}
+                                        onBlur={handleBlur('email')}
+                                        // textAlignVertical="bottom"
+                                    />
+
+                                    {errors.email && touched.email && (
+                                        <Text>{errors.email}</Text>
+                                    )}
+                                    <Separator />
+                                    <TextInput
+                                        // style={styles.input}
+                                        placeholder="Ingrese pass..."
+                                        placeholderTextColor={'darkslategray'}
+                                        onChangeText={handleChange('password')}
+                                        name="password"
+                                        value={values.password}
+                                        onBlur={handleBlur('password')}
+                                        // textAlignVertical="bottom"
+                                    />
+                                    {errors.password && touched.password && (
+                                        <Text>{errors.password}</Text>
+                                    )}
+                                    <Separator />
+                                    <Button
+                                        title="Login"
+                                        onPress={() => {
+                                            handleSubmit();
+                                        }}
+                                    />
+
+                                    {errorAuth && (
+                                        <Text>Error en la autenticacion</Text>
+                                    )}
+                                </>
+                            )}
+                        </View>
                     ) : (
-                        <>
-                            <TextInput
-                                // style={styles.input}
-                                placeholder="Ingrese email..."
-                                placeholderTextColor={'darkslategray'}
-                                onChangeText={handleChange('email')}
-                                name="email"
-                                value={values.email}
-                                onBlur={handleBlur('email')}
-                                // textAlignVertical="bottom"
-                            />
-
-                            {errors.email && touched.email && (
-                                <Text>{errors.email}</Text>
-                            )}
+                        <View>
+                            <Text>Registrado con el email: {user.email}</Text>
                             <Separator />
-                            <TextInput
-                                // style={styles.input}
-                                placeholder="Ingrese pass..."
-                                placeholderTextColor={'darkslategray'}
-                                onChangeText={handleChange('password')}
-                                name="password"
-                                value={values.password}
-                                onBlur={handleBlur('password')}
-                                // textAlignVertical="bottom"
-                            />
-                            {errors.password && touched.password && (
-                                <Text>{errors.password}</Text>
-                            )}
-                            <Separator />
-                            <Button
-                                title="Login"
-                                onPress={() => {
-                                    handleSubmit();
-                                }}
-                            />
-
-                            <Separator />
-                            {user && (
-                                <Text>
-                                    Registrado con el email: {user.email}
-                                </Text>
-                            )}
-                            {errorAuth && (
-                                <Text>Error en la autenticacion</Text>
-                            )}
-                            {user && (
-                                <Button title="Log out" onPress={logout} />
-                            )}
-                        </>
+                            <Button title="Log out" onPress={logout} />
+                        </View>
                     )}
                 </View>
             )}
