@@ -119,13 +119,13 @@ function App() {
                             tabBarInactiveTintColor: 'gray',
                         })}
                     >
-                        <Tab.Screen name="PokeHome" component={PokeHome} />
+                        {/* <Tab.Screen name="PokeHome" component={PokeHome} />
                         {user && (
                             <Tab.Screen
                                 name="PokeDetails"
                                 component={PokeDetails}
                             />
-                        )}
+                        )} */}
                         <Tab.Screen name={'Profile'} component={Login} />
                     </Tab.Navigator>
                 </NavigationContainer>

@@ -13,16 +13,11 @@ import UserCtx from '../contexts/userCtx';
 import { Formik } from 'formik';
 
 import React from 'react';
-import {
-    Text,
-    View,
-    StyleSheet,
-    Button,
-    ActivityIndicator,
-    TextInput,
-} from 'react-native';
+import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { loginSchema } from '../schemas/validationSchema';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TextInput from '../components/TextInput';
+import Button from '../components/Button';
 // import { isLoading } from 'expo-font';
 
 const Separator = () => <View style={styles.separator} />;
@@ -118,39 +113,50 @@ const Login = ({ navigation }) => {
                                 <>
                                     <TextInput
                                         // style={styles.input}
-                                        placeholder="Ingrese email..."
+                                        placeholder="Email"
                                         placeholderTextColor={'darkslategray'}
                                         onChangeText={handleChange('email')}
                                         name="email"
                                         value={values.email}
                                         onBlur={handleBlur('email')}
                                         // textAlignVertical="bottom"
+                                        errorText={errors.email}
+                                        touched={touched.email}
+                                        isEmail={true}
                                     />
-
-                                    {errors.email && touched.email && (
+                                    {/* {errors.email && touched.email && (
                                         <Text>{errors.email}</Text>
-                                    )}
+                                    )} */}
                                     <Separator />
                                     <TextInput
                                         // style={styles.input}
-                                        placeholder="Ingrese pass..."
+                                        placeholder="Contraseña"
                                         placeholderTextColor={'darkslategray'}
                                         onChangeText={handleChange('password')}
                                         name="password"
                                         value={values.password}
                                         onBlur={handleBlur('password')}
+                                        errorText={errors.password}
+                                        touched={touched.password}
+                                        isPassword={true}
+
                                         // textAlignVertical="bottom"
                                     />
-                                    {errors.password && touched.password && (
-                                        <Text>{errors.password}</Text>
-                                    )}
                                     <Separator />
                                     <Button
-                                        title="Login"
+                                        // title="Login"
                                         onPress={() => {
                                             handleSubmit();
                                         }}
-                                    />
+                                        mode="contained"
+                                        disabled={
+                                            errors.email || errors.password
+                                                ? true
+                                                : false
+                                        }
+                                    >
+                                        Login
+                                    </Button>
 
                                     {errorAuth && (
                                         <Text>Error en la autenticacion</Text>
@@ -162,7 +168,10 @@ const Login = ({ navigation }) => {
                         <View>
                             <Text>Registrado con el email: {user.email}</Text>
                             <Separator />
-                            <Button title="Log out" onPress={logout} />
+                            <Button mode="contained" onPress={logout}>
+                                {' '}
+                                Log out
+                            </Button>
                         </View>
                     )}
                 </View>
