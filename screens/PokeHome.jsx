@@ -30,6 +30,7 @@ const PokeHome = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 40,
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',

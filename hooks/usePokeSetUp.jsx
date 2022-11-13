@@ -8,7 +8,7 @@ export const usePokeSetUp = () => {
     React.useEffect(() => {
         console.log(statusSetUp);
 
-        recursiveSequentialFetch({ id: 1, data: [], maxCalls: 905 })
+        recursiveSequentialFetch({ id: 1, data: [], maxCalls: 30 })
             .then((data) => {
                 // console.log('Sequential Fetch Done', data.data);
                 setPokeData(data.data);

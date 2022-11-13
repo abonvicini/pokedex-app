@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         width: 'auto',
     },
     pageContainer: (colorBase) => ({
+        marginTop: 40,
         display: 'flex',
 
         flex: 1,

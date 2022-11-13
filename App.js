@@ -28,6 +28,7 @@ import HomeScreen from './screens/HomeScreen';
 import PokeDetails from './screens/PokeDetails';
 import PokeHome from './screens/PokeHome';
 import Login from './screens/Login';
+import CreateAccount from './screens/CreateAccount';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
     useFonts,
@@ -42,6 +43,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getRandomArbitrary } from './utils/functions';
+import DistributiveScreen from './screens/DistributiveScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,13 +89,10 @@ function App() {
             <QueryClientProvider client={queryClient}>
                 <NavigationContainer>
                     {/* <Stack.Navigator initialRouteName="Login">
-                        <Stack.Screen name="Home" component={HomeScreen} />
                         <Stack.Screen
-                            name="PokeDetails"
-                            component={PokeDetails}
+                            name="CreateAccount"
+                            component={CreateAccount}
                         />
-                        <Stack.Screen name="PokeHome" component={PokeHome} />
-                        <Stack.Screen name="Login" component={Login} />
                     </Stack.Navigator> */}
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
@@ -125,6 +124,7 @@ function App() {
                             },
                             tabBarActiveTintColor: 'tomato',
                             tabBarInactiveTintColor: 'gray',
+                            headerShown: false,
                         })}
                     >
                         <Tab.Screen name="PokeHome" component={PokeHome} />
@@ -135,7 +135,25 @@ function App() {
                                 initialParams={fallback}
                             />
                         )}
-                        <Tab.Screen name={'Profile'} component={Login} />
+                        <Tab.Screen
+                            name={'Profile'}
+                            component={DistributiveScreen}
+                            options={
+                                {
+                                    // headerStyle: { display: 'no' },
+                                    // tabBarIconStyle: { display: 'none' },
+                                }
+                            }
+                        />
+                        {/* <Tab.Screen
+                            name={'CreateAccount'}
+                            component={CreateAccount}
+                            options={{
+                                // tabBarIconStyle: { display: 'none' },
+                                tabBarItemStyle: { display: 'none' },
+                                // headerShown: true,
+                            }}
+                        /> */}
                     </Tab.Navigator>
                 </NavigationContainer>
             </QueryClientProvider>

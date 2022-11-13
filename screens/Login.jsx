@@ -149,6 +149,16 @@ const Login = ({ navigation }) => {
                                     {errorAuth && (
                                         <Text>Error en la autenticacion</Text>
                                     )}
+                                    <Button
+                                        onPress={() => {
+                                            navigation.navigate(
+                                                'CreateAccount',
+                                            );
+                                        }}
+                                        mode="contained"
+                                    >
+                                        Create Account
+                                    </Button>
                                 </>
                             )}
                         </View>
@@ -169,6 +179,7 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 40,
         flex: 1,
         justifyContent: 'center',
         marginHorizontal: 16,
