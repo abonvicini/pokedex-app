@@ -2,8 +2,8 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import MiniCard from './MiniCard';
 
-const MiniCardFlatList = ({pokeData, navigation}) => {
-    console.log(pokeData)
+const MiniCardFlatList = ({ pokeData, navigation }) => {
+    // console.log(pokeData)
     const renderItem = ({ item }) => {
         return <MiniCard item={item} navigation={navigation} />;
     };

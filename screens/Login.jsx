@@ -97,12 +97,10 @@ const Login = ({ navigation }) => {
                 handleSubmit,
                 handleBlur,
                 handleChange,
-                setSubmitting,
                 values,
                 errors,
                 touched,
                 isSubmitting,
-                isValidating,
             }) => (
                 <View style={styles.container}>
                     {!user ? (
@@ -112,24 +110,18 @@ const Login = ({ navigation }) => {
                             ) : (
                                 <>
                                     <TextInput
-                                        // style={styles.input}
                                         placeholder="Email"
                                         placeholderTextColor={'darkslategray'}
                                         onChangeText={handleChange('email')}
                                         name="email"
                                         value={values.email}
                                         onBlur={handleBlur('email')}
-                                        // textAlignVertical="bottom"
                                         errorText={errors.email}
                                         touched={touched.email}
                                         isEmail={true}
                                     />
-                                    {/* {errors.email && touched.email && (
-                                        <Text>{errors.email}</Text>
-                                    )} */}
                                     <Separator />
                                     <TextInput
-                                        // style={styles.input}
                                         placeholder="Contraseña"
                                         placeholderTextColor={'darkslategray'}
                                         onChangeText={handleChange('password')}
@@ -139,12 +131,9 @@ const Login = ({ navigation }) => {
                                         errorText={errors.password}
                                         touched={touched.password}
                                         isPassword={true}
-
-                                        // textAlignVertical="bottom"
                                     />
                                     <Separator />
                                     <Button
-                                        // title="Login"
                                         onPress={() => {
                                             handleSubmit();
                                         }}
@@ -157,7 +146,6 @@ const Login = ({ navigation }) => {
                                     >
                                         Login
                                     </Button>
-
                                     {errorAuth && (
                                         <Text>Error en la autenticacion</Text>
                                     )}
@@ -166,10 +154,9 @@ const Login = ({ navigation }) => {
                         </View>
                     ) : (
                         <View>
-                            <Text>Registrado con el email: {user.email}</Text>
+                            <Text>Logged in with email: {user.email}</Text>
                             <Separator />
                             <Button mode="contained" onPress={logout}>
-                                {' '}
                                 Log out
                             </Button>
                         </View>
@@ -197,7 +184,6 @@ const styles = StyleSheet.create({
     separator: {
         marginVertical: 8,
         borderBottomColor: '#737373',
-        // borderBottomWidth: StyleSheet.hairlineWidth,
     },
 });
 

@@ -4,7 +4,7 @@ import { fetchPokemon } from '../lib/api';
 
 //useQuery hook
 export const usePokeFetch = (pokeName) => {
-    const { isFetching, error, isError, data, status } = useQuery({
+    const { isFetching, error, isError, data, status, refetch } = useQuery({
         queryKey: ['pokemon', pokeName],
         // queryFn: fetchPokemon,
         queryFn: () => fetchPokemon(pokeName),
@@ -87,6 +87,7 @@ export const usePokeFetch = (pokeName) => {
     }
 
     return {
+        refetch,
         isFetching,
         error,
         isError,

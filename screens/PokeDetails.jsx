@@ -1,38 +1,75 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import Button from '../components/Button';
 import PokeCard, { typesColors } from '../components/PokeCard';
 import { usePokeFetch } from '../hooks/usePokeFetch';
+import { getRandomArbitrary } from '../utils/functions';
 
 const PokeDetails = ({ route, navigation }) => {
-    const fallback = { pokeName: 1 };
-    const { pokeName } = route.params || fallback;
-    console.log('pokeName', pokeName);
-    const { isFetching, error, isError, data, status, pokemonInfo } =
+    let content;
+
+    const [randomPoke, setRandomPoke] = React.useState(null);
+
+    const { pokeName } = randomPoke === null ? route.params : randomPoke;
+
+    const { isFetching, error, isError, data, status, pokemonInfo, refetch } =
         usePokeFetch(pokeName);
 
-    status === 'success' && console.log('pokeInfo: ', data.types[0]);
+    const handleRandom = () => {
+        const randomId = getRandomArbitrary(1, 850);
+        setRandomPoke({ pokeName: randomId });
+        // refetch();
+    };
+
+    // status === 'success' && console.log('pokeInfo: ', data.types[0]);
     if (isFetching) {
-        return <Text>Loading</Text>;
+        content = <Text>Loading</Text>;
     }
 
-    return (
-        <View style={styles.pageContainer(typesColors[pokemonInfo.types[0]])}>
-            <Image
-                style={styles.pokeImage}
-                source={require('../img/pokeball.png')}
-            />
-            <PokeCard item={pokemonInfo} />
+    if (status === 'success' && data) {
+        content = (
+            <View
+                style={styles.pageContainer(typesColors[pokemonInfo.types[0]])}
+            >
+                {/* <View> */}
+                <Image
+                    style={styles.pokeImage}
+                    source={require('../img/pokeball.png')}
+                />
+                <PokeCard item={pokemonInfo} />
+                <Button
+                    mode="outlined"
+                    onPress={handleRandom}
+                    style={styles.randomButton}
+                >
+                    Randomize
+                </Button>
+            </View>
+        );
+    }
 
-            {/* <Button
-                title="Return to Home"
-                color="tomato"
-                onPress={() => navigation.goBack()}
-            /> */}
-        </View>
+    useFocusEffect(
+        React.useCallback(() => {
+            // alert('Screen was focused');
+            return () => {
+                setRandomPoke(null);
+                // alert(randomPoke);
+            };
+        }, []),
     );
+
+    return content;
 };
 
 const styles = StyleSheet.create({
+    randomButton: {
+        position: 'absolute',
+        bottom: 0,
+        right: 15,
+        borderRadius: 100,
+        width: 'auto',
+    },
     pageContainer: (colorBase) => ({
         display: 'flex',
 

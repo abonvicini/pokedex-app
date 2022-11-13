@@ -5,7 +5,7 @@ export const usePokeList = () => {
     const { isFetching, error, isError, data, status, refetch } = useQuery({
         queryKey: ['listPokemons'],
         queryFn: fetchListPokemons,
-        queryHash: { refetchOnWindowFocus: true },
+        // queryHash: { refetchOnWindowFocus: true },
     });
 
     let pokeNames = [];

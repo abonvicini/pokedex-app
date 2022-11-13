@@ -13,11 +13,14 @@ import { typesColors } from './PokeCard';
 const MiniCard = ({ item, navigation }) => {
     const { user } = React.useContext(UserCtx);
     const handleNavigate = () => {
-        navigation.navigate('PokeDetails', { pokeName: item.name });
+        navigation.navigate('PokeDetails', { pokeName: item.id });
     };
 
     const handleNotLogged = () => {
-        Alert.alert('Para ver detalles de un Pokémon, primero debes logearte.');
+        Alert.alert(
+            'No permitido',
+            'Para poder ver los stats de un Pokémon, primero debes logearte',
+        );
     };
 
     return (
@@ -34,7 +37,7 @@ const MiniCard = ({ item, navigation }) => {
                             typesColors[item.types[0]],
                         )}
                     >
-                        {item.order}
+                        {item.id}
                     </Text>
                 </View>
                 <View style={styles.contentMiniCard}>

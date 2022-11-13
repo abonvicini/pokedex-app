@@ -41,6 +41,7 @@ import UserCtx from './contexts/userCtx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getRandomArbitrary } from './utils/functions';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,6 +49,7 @@ const queryClient = new QueryClient();
 
 function App() {
     const [user, setUser] = React.useState(null);
+    const [fallback, setFallback] = React.useState({});
     let [fontsLoaded] = useFonts({
         Poppins_300Light,
         Poppins_400Regular,
@@ -68,6 +70,12 @@ function App() {
     React.useEffect(() => {
         const savedUser = getUserFromAsyncStorage();
         // console.log('savedUser: ', savedUser.then());
+    }, []);
+
+    React.useEffect(() => {
+        const random = getRandomArbitrary(1, 950);
+        setFallback({ pokeName: random });
+        console.log('pokeName', random);
     }, []);
 
     if (!fontsLoaded) {
@@ -119,13 +127,14 @@ function App() {
                             tabBarInactiveTintColor: 'gray',
                         })}
                     >
-                        {/* <Tab.Screen name="PokeHome" component={PokeHome} />
+                        <Tab.Screen name="PokeHome" component={PokeHome} />
                         {user && (
                             <Tab.Screen
                                 name="PokeDetails"
                                 component={PokeDetails}
+                                initialParams={fallback}
                             />
-                        )} */}
+                        )}
                         <Tab.Screen name={'Profile'} component={Login} />
                     </Tab.Navigator>
                 </NavigationContainer>
