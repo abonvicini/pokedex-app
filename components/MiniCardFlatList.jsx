@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         flex: 1,
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
     },
 });
 
