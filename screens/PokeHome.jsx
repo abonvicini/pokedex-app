@@ -3,27 +3,61 @@ import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import { usePokeSetUp } from '../hooks/usePokeSetUp';
 import MiniCardFlatList from '../components/MiniCardFlatList';
 import HeaderPokeList from '../components/HeaderPokeList';
+import TextInput from '../components/TextInput';
+import { useFocusEffect } from '@react-navigation/native';
 
 const PokeHome = ({ navigation }) => {
     const { pokeData, statusSetUp } = usePokeSetUp();
+    const [dataQuery, setDataQuery] = React.useState([]);
 
-    if (statusSetUp !== 'success') {
+    if (statusSetUp !== 'success' ) {
         return (
             <View style={styles.container}>
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size='large' color='#0000ff' />
             </View>
         );
     }
 
-    return (
+    const handleQuery = (str) => {
+        const query = pokeData.filter(
+            (poke) =>
+            poke.name.toLowerCase().includes(str.toLowerCase())
+        );
+        console.log(query)
+        setDataQuery((prev) => (prev = query));
+    };
+
+    useFocusEffect(
+        React.useCallback(() => {
+            setDataQuery(pokeData);
+            // alert('Screen was focused');
+            return () => {
+                // alert(randomPoke);
+            };
+        }, [statusSetUp]),
+    );
+
+
+
+
+
+
+
+    return statusSetUp !== 'idle' &&(
         <View style={styles.container}>
             {/* <Text>PokeHome</Text> */}
             {/* HeaderHome */}
-            <HeaderPokeList />
-
+            {/* <HeaderPokeList />
+            <TextInput
+                placeholder='Search...'
+                placeholderTextColor={'darkslategray'}
+                onChangeText={(e) => handleQuery(e)}
+                name='search'
+              
+            /> */}
             {/* SearchBox */}
             {/* PokemonCardsList */}
-            <MiniCardFlatList pokeData={pokeData} navigation={navigation} />
+            {/* <MiniCardFlatList pokeData={dataQuery} navigation={navigation} /> */}
         </View>
     );
 };
