@@ -13,11 +13,12 @@ import UserCtx from '../contexts/userCtx';
 import { Formik } from 'formik';
 
 import React from 'react';
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { loginSchema } from '../schemas/validationSchema';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
+import { ActivityIndicator } from 'react-native-paper';
 // import { isLoading } from 'expo-font';
 
 const Separator = () => <View style={styles.separator} />;
@@ -39,7 +40,7 @@ const Login = ({ navigation }) => {
         return subscriber;
     }, [loading]);
 
-    if (loading) return <ActivityIndicator size="large" color="#0000ff" />;
+    if (loading) return <ActivityIndicator />;
 
     const handleLogin = (values, setSubmitting) => {
         // console.log('handleLogin', values.email);
