@@ -7,6 +7,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import UserCtx from '../contexts/userCtx';
+import { createAccountSchema } from '../schemas/validationSchema';
 
 const auth = getAuth();
 
@@ -53,8 +54,13 @@ const CreateAccount = ({ navigation }) => {
 
     return (
         <Formik
-            initialValues={{ email: '', password: '' }}
-            // validationSchema={loginSchema}
+            initialValues={{
+                name: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            }}
+            validationSchema={createAccountSchema}
             onSubmit={(values, { setSubmitting }) => {
                 handleCreateAccount(values, setSubmitting);
             }}
@@ -110,15 +116,15 @@ const CreateAccount = ({ navigation }) => {
                             />
                             <Separator />
                             <TextInput
-                                placeholder="Repeat password"
+                                placeholder="Confirm password"
                                 placeholderTextColor={'darkslategray'}
-                                onChangeText={handleChange('passwordRepeat')}
-                                name="passwordRepeat"
-                                value={values.passwordRepeat}
-                                onBlur={handleBlur('passwordRepeat')}
-                                errorText={errors.passwordRepeat}
-                                touched={touched.passwordRepeat}
-                                isNewPassWordRepeat={true}
+                                onChangeText={handleChange('confirmPassword')}
+                                name="confirmPassword"
+                                value={values.confirmPassword}
+                                onBlur={handleBlur('confirmPassword')}
+                                errorText={errors.confirmPassword}
+                                touched={touched.confirmPassword}
+                                isConfirmPassword={true}
                             />
                             <Separator />
                             <Button
@@ -127,6 +133,14 @@ const CreateAccount = ({ navigation }) => {
                                     handleSubmit();
                                 }}
                                 mode="contained"
+                                disabled={
+                                    errors.name ||
+                                    errors.email ||
+                                    errors.password ||
+                                    errors.confirmPassword
+                                        ? true
+                                        : false
+                                }
                             >
                                 Create
                             </Button>
