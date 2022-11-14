@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
     },
     randomButton: {
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
         position: 'absolute',
         bottom: 0,
         right: 15,

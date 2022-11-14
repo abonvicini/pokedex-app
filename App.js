@@ -20,6 +20,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { getRandomArbitrary } from './utils/functions';
 import DistributiveScreen from './screens/DistributiveScreen';
 import { LogBox } from 'react-native';
+import { theme } from './utils/theme';
 
 const Tab = createBottomTabNavigator();
 const queryClient = new QueryClient();
@@ -97,8 +98,8 @@ function App() {
                                     />
                                 );
                             },
-                            tabBarActiveTintColor: 'tomato',
-                            tabBarInactiveTintColor: 'gray',
+                            tabBarActiveTintColor: theme.colors.primary,
+                            tabBarInactiveTintColor: theme.colors.secondary,
                             headerShown: false,
                         })}
                     >

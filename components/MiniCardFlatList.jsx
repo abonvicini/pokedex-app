@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import MiniCard from './MiniCard';
 
 const MiniCardFlatList = ({ pokeData, navigation }) => {
-    // console.log(pokeData)
     const renderItem = ({ item }) => {
         return <MiniCard item={item} navigation={navigation} />;
     };
@@ -39,15 +38,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        // paddingBottom: 10,
     },
     separator: {
-        // flex: ,
-        // borderWidth: 1,
-        // alignContent: 'stretch',
-        // alignItems: 'center',
         justifyContent: 'space-between',
-        // flexWrap: 'wrap',
     },
 });
 
