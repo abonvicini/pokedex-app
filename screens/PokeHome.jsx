@@ -1,11 +1,13 @@
 import React from 'react';
-import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { usePokeSetUp } from '../hooks/usePokeSetUp';
 import MiniCardFlatList from '../components/MiniCardFlatList';
 import HeaderPokeList from '../components/HeaderPokeList';
 import TextInput from '../components/TextInput';
 import { useFocusEffect } from '@react-navigation/native';
 import SearchBox from '../components/SearchBox';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActivityIndicator } from 'react-native-paper';
 
 const PokeHome = ({ navigation }) => {
     const { pokeData, statusSetUp } = usePokeSetUp();
@@ -14,7 +16,7 @@ const PokeHome = ({ navigation }) => {
     if (statusSetUp === 'idle') {
         return (
             <View style={styles.container}>
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator />
             </View>
         );
     }

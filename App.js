@@ -1,34 +1,10 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
 import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens/HomeScreen';
 import PokeDetails from './screens/PokeDetails';
 import PokeHome from './screens/PokeHome';
-import Login from './screens/Login';
-import CreateAccount from './screens/CreateAccount';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
     useFonts,
@@ -41,12 +17,10 @@ import {
 import UserCtx from './contexts/userCtx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getRandomArbitrary } from './utils/functions';
 import DistributiveScreen from './screens/DistributiveScreen';
 import { LogBox } from 'react-native';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const queryClient = new QueryClient();
 
@@ -81,14 +55,12 @@ function App() {
 
     React.useEffect(() => {
         const savedUser = getUserFromAsyncStorage();
-        // console.log('savedUser: ', savedUser.then());
     }, []);
 
     React.useEffect(() => {
-        const random = getRandomArbitrary(1, 950);
+        const random = getRandomArbitrary(1, 906);
         setFallback({ pokeName: random });
-        console.log('pokeName', random);
-    }, []);
+    }, [user]);
 
     if (!fontsLoaded) {
         return null;
@@ -98,12 +70,6 @@ function App() {
         <UserCtx.Provider value={{ user, setUser }}>
             <QueryClientProvider client={queryClient}>
                 <NavigationContainer>
-                    {/* <Stack.Navigator initialRouteName="Login">
-                        <Stack.Screen
-                            name="CreateAccount"
-                            component={CreateAccount}
-                        />
-                    </Stack.Navigator> */}
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
                             tabBarIcon: ({ focused, color, size }) => {
@@ -123,7 +89,6 @@ function App() {
                                         : 'person-circle-outline';
                                 }
 
-                                // You can return any component that you like here!
                                 return (
                                     <Ionicons
                                         name={iconName}
@@ -148,22 +113,7 @@ function App() {
                         <Tab.Screen
                             name={'Profile'}
                             component={DistributiveScreen}
-                            options={
-                                {
-                                    // headerStyle: { display: 'no' },
-                                    // tabBarIconStyle: { display: 'none' },
-                                }
-                            }
                         />
-                        {/* <Tab.Screen
-                            name={'CreateAccount'}
-                            component={CreateAccount}
-                            options={{
-                                // tabBarIconStyle: { display: 'none' },
-                                tabBarItemStyle: { display: 'none' },
-                                // headerShown: true,
-                            }}
-                        /> */}
                     </Tab.Navigator>
                 </NavigationContainer>
             </QueryClientProvider>

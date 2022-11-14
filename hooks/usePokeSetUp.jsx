@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import { recursiveSequentialFetch } from '../lib/api';
 
@@ -8,7 +9,7 @@ export const usePokeSetUp = () => {
     React.useEffect(() => {
         console.log(statusSetUp);
 
-        recursiveSequentialFetch({ id: 1, data: [], maxCalls: 30 })
+        recursiveSequentialFetch({ id: 1, data: [], maxCalls: 90 })
             .then((data) => {
                 // console.log('Sequential Fetch Done', data.data);
                 setPokeData(data.data);
