@@ -13,18 +13,19 @@ import UserCtx from '../contexts/userCtx';
 import { Formik } from 'formik';
 
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { loginSchema } from '../schemas/validationSchema';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import { ActivityIndicator } from 'react-native-paper';
-// import { isLoading } from 'expo-font';
+import { Feather } from '@expo/vector-icons';
 
 const Separator = () => <View style={styles.separator} />;
 
 const Login = ({ navigation }) => {
     const { user, setUser } = React.useContext(UserCtx);
+    const [isVisible, setIsVisible] = React.useState(true);
     const [loading, setLoading] = React.useState(true);
     const [errorAuth, setErrorAuth] = React.useState(false);
 
@@ -112,7 +113,6 @@ const Login = ({ navigation }) => {
                                 <>
                                     <TextInput
                                         placeholder="Email"
-                                        placeholderTextColor={'darkslategray'}
                                         onChangeText={handleChange('email')}
                                         name="email"
                                         value={values.email}
@@ -122,18 +122,37 @@ const Login = ({ navigation }) => {
                                         isEmail={true}
                                     />
                                     <Separator />
-                                    <TextInput
-                                        placeholder="Contraseña"
-                                        placeholderTextColor={'darkslategray'}
-                                        onChangeText={handleChange('password')}
-                                        name="password"
-                                        value={values.password}
-                                        onBlur={handleBlur('password')}
-                                        errorText={errors.password}
-                                        touched={touched.password}
-                                        isPassword={true}
-                                    />
-                                    <Separator />
+                                    <View style={styles.inputWithIcon}>
+                                        <TextInput
+                                            placeholder="Contraseña"
+                                            onChangeText={handleChange(
+                                                'password',
+                                            )}
+                                            name="password"
+                                            value={values.password}
+                                            onBlur={handleBlur('password')}
+                                            errorText={errors.password}
+                                            touched={touched.password}
+                                            isPassword={true}
+                                            secureTextEntry={isVisible}
+                                        />
+                                        <Separator />
+                                        <Pressable
+                                            style={styles.pressable}
+                                            onPress={() =>
+                                                setIsVisible(!isVisible)
+                                            }
+                                        >
+                                            <Feather
+                                                name={
+                                                    !isVisible
+                                                        ? 'eye'
+                                                        : 'eye-off'
+                                                }
+                                                size={24}
+                                            />
+                                        </Pressable>
+                                    </View>
                                     <Button
                                         onPress={() => {
                                             handleSubmit();
@@ -179,6 +198,12 @@ const Login = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+    pressable: {
+        paddingBottom: 20,
+    },
+    inputWithIcon: {
+        alignItems: 'center',
+    },
     container: {
         marginTop: 40,
         flex: 1,

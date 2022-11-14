@@ -30,6 +30,9 @@ export const createAccountSchema = yup.object().shape({
         .string()
         .trim('No debe tener espacios en blanco')
         .min(8, ({ min }) => `Debe tener un mínimo de ${min} caracteres`)
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
+        .oneOf(
+            [yup.ref('password'), null],
+            'Las contraseñas deben ser identicas',
+        )
         .required('La contraseña es obligatoria'),
 });

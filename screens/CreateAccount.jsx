@@ -2,12 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { Formik } from 'formik';
 import React from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import UserCtx from '../contexts/userCtx';
 import { createAccountSchema } from '../schemas/validationSchema';
+import { Feather } from '@expo/vector-icons';
 
 const auth = getAuth();
 
@@ -15,6 +16,7 @@ const Separator = () => <View style={styles.separator} />;
 
 const CreateAccount = ({ navigation }) => {
     const { user, setUser } = React.useContext(UserCtx);
+    const [isVisible, setIsVisible] = React.useState(true);
     const [errorAuth, setErrorAuth] = React.useState(false);
 
     const storeUser = async (user) => {
@@ -81,7 +83,6 @@ const CreateAccount = ({ navigation }) => {
                         <>
                             <TextInput
                                 placeholder="Name"
-                                placeholderTextColor={'darkslategray'}
                                 onChangeText={handleChange('name')}
                                 name="name"
                                 value={values.name}
@@ -93,7 +94,6 @@ const CreateAccount = ({ navigation }) => {
                             <Separator />
                             <TextInput
                                 placeholder="Email"
-                                placeholderTextColor={'darkslategray'}
                                 onChangeText={handleChange('email')}
                                 name="email"
                                 value={values.email}
@@ -103,30 +103,43 @@ const CreateAccount = ({ navigation }) => {
                                 isEmail={true}
                             />
                             <Separator />
-                            <TextInput
-                                placeholder="Password"
-                                placeholderTextColor={'darkslategray'}
-                                onChangeText={handleChange('password')}
-                                name="password"
-                                value={values.password}
-                                onBlur={handleBlur('password')}
-                                errorText={errors.password}
-                                touched={touched.password}
-                                isNewPassword={true}
-                            />
-                            <Separator />
-                            <TextInput
-                                placeholder="Confirm password"
-                                placeholderTextColor={'darkslategray'}
-                                onChangeText={handleChange('confirmPassword')}
-                                name="confirmPassword"
-                                value={values.confirmPassword}
-                                onBlur={handleBlur('confirmPassword')}
-                                errorText={errors.confirmPassword}
-                                touched={touched.confirmPassword}
-                                isConfirmPassword={true}
-                            />
-                            <Separator />
+                            <View style={styles.inputWithIcon}>
+                                <TextInput
+                                    placeholder="Password"
+                                    onChangeText={handleChange('password')}
+                                    name="password"
+                                    value={values.password}
+                                    onBlur={handleBlur('password')}
+                                    errorText={errors.password}
+                                    touched={touched.password}
+                                    isNewPassword={true}
+                                    secureTextEntry={isVisible}
+                                />
+                                <Separator />
+                                <TextInput
+                                    placeholder="Confirm password"
+                                    onChangeText={handleChange(
+                                        'confirmPassword',
+                                    )}
+                                    name="confirmPassword"
+                                    value={values.confirmPassword}
+                                    onBlur={handleBlur('confirmPassword')}
+                                    errorText={errors.confirmPassword}
+                                    touched={touched.confirmPassword}
+                                    isConfirmPassword={true}
+                                    secureTextEntry={isVisible}
+                                />
+                                <Separator />
+                                <Pressable
+                                    style={styles.pressable}
+                                    onPress={() => setIsVisible(!isVisible)}
+                                >
+                                    <Feather
+                                        name={!isVisible ? 'eye' : 'eye-off'}
+                                        size={24}
+                                    />
+                                </Pressable>
+                            </View>
                             <Button
                                 onPress={() => {
                                     console.log('createAccount');
@@ -156,6 +169,12 @@ const CreateAccount = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+    pressable: {
+        paddingVertical: 15,
+    },
+    inputWithIcon: {
+        alignItems: 'center',
+    },
     container: {
         marginTop: 40,
         flex: 1,

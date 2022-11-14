@@ -15,7 +15,6 @@ const SearchBox = ({ setDataQuery, data, ...props }) => {
         <View style={styles.searchBox}>
             <TextInput
                 placeholder="Buscar..."
-                placeholderTextColor={'darkslategray'}
                 onChangeText={(e) => handleQuery(e)}
                 name="search"
                 isSearchBox={true}
