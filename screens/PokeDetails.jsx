@@ -70,7 +70,7 @@ const PokeDetails = ({ route, navigation }) => {
 
                     <Image
                         style={styles.pokeImage}
-                        source={require('../img/PokeballX4.png')}
+                        source={require('../img/pokeballX4.png')}
                     />
                     <PokeCard item={pokemonInfo} />
                     <Button

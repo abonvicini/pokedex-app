@@ -4,10 +4,10 @@
     "slug": "pokedex-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-poke.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash2.png",
+      "image": "./assets/splash-light.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF" 
     },
