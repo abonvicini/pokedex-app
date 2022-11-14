@@ -44,12 +44,22 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getRandomArbitrary } from './utils/functions';
 import DistributiveScreen from './screens/DistributiveScreen';
+import { LogBox } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const queryClient = new QueryClient();
 
 function App() {
+    // Se apagan warns por comodidad en desarrollo
+
+    LogBox.ignoreLogs([
+        'AsyncStorage has been extracted from react-native core',
+    ]);
+    LogBox.ignoreLogs([
+        'ProgressBarAndroid has been extracted from react-native core',
+    ]);
+
     const [user, setUser] = React.useState(null);
     const [fallback, setFallback] = React.useState({});
     let [fontsLoaded] = useFonts({

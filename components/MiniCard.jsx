@@ -57,12 +57,12 @@ const MiniCard = ({ item, navigation }) => {
 const styles = StyleSheet.create({
     miniCardContainer: (color) => ({
         //Display
-        display: 'flex',
+        // display: 'flex',
+        // marginHorizontal: 5,
+        flex: 0.25,
         flexDirection: 'column',
         alignItems: 'flex-start',
-        //Tamaño
-        width: 104,
-        // height: 112,
+        minWidth: 80,
         //Colors
         backgroundColor: '#FFFFFF',
         //Decos
@@ -105,16 +105,17 @@ const styles = StyleSheet.create({
     pokeImageMiniCard: {
         width: 72,
         height: 72,
-
         // alignSelf: 'center',
     },
     footerMiniCard: (color) => ({
-        display: 'flex',
+        // display: 'flex',
+        // height: 'auto',
         flexDirection: 'row',
         alignItems: 'flex-start',
+        // justifyContent: 'stretch',
 
         paddingVertical: 4,
-        paddingHorizontal: 8,
+        paddingHorizontal: 2,
 
         backgroundColor: color,
 

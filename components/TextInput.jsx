@@ -12,22 +12,24 @@ const TextInput = ({
     description,
     ...props
 }) => {
-    const fadeAnim = useRef(new Animated.Value(8)).current;
+    const fadeAnim = useRef(new Animated.Value(0)).current;
     const [onFocus, setOnFocus] = React.useState(false);
 
     const fadeIn = () => {
         // Will change fadeAnim value to 1 in 5 seconds
         Animated.timing(fadeAnim, {
-            toValue: 40,
+            toValue: 25,
             duration: 100,
+            useNativeDriver: false,
         }).start();
     };
 
     const fadeOut = () => {
         // Will change fadeAnim value to 0 in 3 seconds
         Animated.timing(fadeAnim, {
-            toValue: 8,
+            toValue: 0,
             duration: 200,
+            useNativeDriver: false,
         }).start();
     };
 
@@ -45,7 +47,7 @@ const TextInput = ({
 
     if (isSearchBox) {
         return (
-            <Animated.View style={{ marginVertical: fadeAnim }}>
+            <Animated.View style={{ marginVertical: fadeAnim, flex: 1 }}>
                 <View style={styles.container}>
                     <Input
                         onBlur={handleOnBlur}
@@ -55,7 +57,7 @@ const TextInput = ({
                         underlineColor="transparent"
                         activeUnderlineColor={
                             !errorText || !touched
-                                ? theme.colors.primary
+                                ? 'transparent'
                                 : theme.colors.error
                         }
                         // mode="outlined"
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.surface,
         fontSize: 14,
         height: 34,
-        marginBottom: 8,
+        // marginBottom: 4,
         borderWidth: 1,
         borderColor: '#E0E0E0',
         borderTopRightRadius: 10,

@@ -28,6 +28,7 @@ const MiniCardFlatList = ({ pokeData, navigation }) => {
                 columnWrapperStyle={styles.separator}
                 horizontal={false}
                 numColumns={3}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     );
@@ -38,10 +39,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
+        // paddingBottom: 10,
     },
     separator: {
-        flex: 1,
+        // flex: ,
+        // borderWidth: 1,
+        // alignContent: 'stretch',
+        // alignItems: 'center',
         justifyContent: 'space-between',
+        // flexWrap: 'wrap',
     },
 });
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Image,
     ProgressBarAndroid,
+    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -68,154 +69,176 @@ const PokeCard = ({ item }) => {
     };
 
     return (
-        <View style={styles.cardContainer}>
-            {/* <Text>PokeCard</Text> */}
-            <Image
-                style={styles.pokeImage}
-                source={{ uri: `${item.imageArtWork}` }}
-            />
+        <View style={styles.container}>
+            <View style={styles.cardContainer}>
+                {/* <Text>PokeCard</Text> */}
+                <Image
+                    style={styles.pokeImage}
+                    source={{ uri: `${item.imageArtWork}` }}
+                />
 
-            <View style={styles.typesContainer}>{renderTypes()}</View>
+                <View style={styles.typesContainer}>{renderTypes()}</View>
 
-            <View style={styles.divider} />
-            <View style={styles.titleWrapper}>
-                <Text style={styles.titleText(typesColors[item.types[0]])}>
-                    {item.title}
-                </Text>
-            </View>
-            <View style={styles.divider} />
-
-            <View style={styles.infoWrapper}>
-                <View style={styles.infoContainer}>
-                    <View style={styles.infoDetails}>
-                        <FontAwesome5 name="weight" size={14} color="black" />
-
-                        <View style={styles.gapper8} />
-                        <Text style={styles.text}>
-                            {item.info.weight / 10} kg
-                        </Text>
-                    </View>
-                    <Text style={[styles.text, styles.textDetails]}>
-                        Weight
+                <View style={styles.divider} />
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.titleText(typesColors[item.types[0]])}>
+                        {item.title}
                     </Text>
                 </View>
-                <View style={styles.slimGrayVertical} />
-                <View style={styles.infoContainer}>
-                    <View style={styles.infoDetails}>
-                        <FontAwesome5
-                            name="ruler-combined"
-                            size={14}
-                            color="black"
+                <View style={styles.divider} />
+
+                <View style={styles.infoWrapper}>
+                    <View style={styles.infoContainer}>
+                        <View style={styles.infoDetails}>
+                            <FontAwesome5
+                                name="weight"
+                                size={14}
+                                color="black"
+                            />
+
+                            <View style={styles.gapper8} />
+                            <Text style={styles.text}>
+                                {item.info.weight / 10} kg
+                            </Text>
+                        </View>
+                        <Text style={[styles.text, styles.textDetails]}>
+                            Weight
+                        </Text>
+                    </View>
+                    <View style={styles.slimGrayVertical} />
+                    <View style={styles.infoContainer}>
+                        <View style={styles.infoDetails}>
+                            <FontAwesome5
+                                name="ruler-combined"
+                                size={14}
+                                color="black"
+                            />
+                            <View style={styles.gapper8} />
+                            <Text style={styles.text}>
+                                {item.info.height / 10} m
+                            </Text>
+                        </View>
+                        <Text style={[styles.text, styles.textDetails]}>
+                            Height
+                        </Text>
+                    </View>
+                    <View style={styles.slimGrayVertical} />
+                    <View style={styles.infoContainer}>
+                        <View
+                            style={[styles.infoDetails, styles.infoAbilities]}
+                        >
+                            {renderAbilities()}
+                        </View>
+                        <Text style={[styles.text, styles.textDetails]}>
+                            Abilities
+                        </Text>
+                        {/* FALTA ICONO */}
+                    </View>
+                </View>
+
+                <View style={styles.divider} />
+
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.titleText(typesColors[item.types[0]])}>
+                        Base Stats
+                    </Text>
+                </View>
+
+                <View style={styles.divider} />
+
+                <View style={styles.baseStatsWrapper}>
+                    <View style={styles.verticalContainer}>
+                        <Text
+                            style={styles.baseStatsText(
+                                typesColors[item.types[0]],
+                            )}
+                        >
+                            ATK
+                        </Text>
+                        <Text
+                            style={styles.baseStatsText(
+                                typesColors[item.types[0]],
+                            )}
+                        >
+                            DEF
+                        </Text>
+                        <Text
+                            style={styles.baseStatsText(
+                                typesColors[item.types[0]],
+                            )}
+                        >
+                            HP
+                        </Text>
+                        <Text
+                            style={styles.baseStatsText(
+                                typesColors[item.types[0]],
+                            )}
+                        >
+                            SATK
+                        </Text>
+                        <Text
+                            style={styles.baseStatsText(
+                                typesColors[item.types[0]],
+                            )}
+                        >
+                            SDEF
+                        </Text>
+                        <Text
+                            style={styles.baseStatsText(
+                                typesColors[item.types[0]],
+                            )}
+                        >
+                            SPD
+                        </Text>
+                    </View>
+                    <View style={styles.gapper8} />
+                    <View style={styles.slimGrayVertical} />
+                    <View style={styles.gapper8} />
+
+                    {renderStats()}
+                    <View style={styles.gapper8} />
+
+                    <View
+                        style={[styles.verticalContainer, styles.progressBar]}
+                    >
+                        <ProgressBarAndroid
+                            styleAttr="Horizontal"
+                            indeterminate={false}
+                            progress={item.stats.attack / 100}
+                            color={typesColors[item.types[0]]}
                         />
-                        <View style={styles.gapper8} />
-                        <Text style={styles.text}>
-                            {item.info.height / 10} m
-                        </Text>
+                        <ProgressBarAndroid
+                            animating={true}
+                            styleAttr="Horizontal"
+                            indeterminate={false}
+                            progress={item.stats.defense / 100}
+                            color={typesColors[item.types[0]]}
+                        />
+                        <ProgressBarAndroid
+                            styleAttr="Horizontal"
+                            indeterminate={false}
+                            progress={item.stats.hp / 100}
+                            color={typesColors[item.types[0]]}
+                        />
+                        <ProgressBarAndroid
+                            styleAttr="Horizontal"
+                            indeterminate={false}
+                            progress={item.stats['special-attack'] / 100}
+                            color={typesColors[item.types[0]]}
+                        />
+                        <ProgressBarAndroid
+                            styleAttr="Horizontal"
+                            indeterminate={false}
+                            progress={item.stats['special-defense'] / 100}
+                            color={typesColors[item.types[0]]}
+                        />
+                        <ProgressBarAndroid
+                            styleAttr="Horizontal"
+                            indeterminate={false}
+                            progress={item.stats.speed / 100}
+                            color={typesColors[item.types[0]]}
+                        />
                     </View>
-                    <Text style={[styles.text, styles.textDetails]}>
-                        Height
-                    </Text>
-                </View>
-                <View style={styles.slimGrayVertical} />
-                <View style={styles.infoContainer}>
-                    <View style={[styles.infoDetails, styles.infoAbilities]}>
-                        {renderAbilities()}
-                    </View>
-                    <Text style={[styles.text, styles.textDetails]}>
-                        Abilities
-                    </Text>
-                    {/* FALTA ICONO */}
-                </View>
-            </View>
-
-            <View style={styles.divider} />
-
-            <View style={styles.titleWrapper}>
-                <Text style={styles.titleText(typesColors[item.types[0]])}>
-                    Base Stats
-                </Text>
-            </View>
-
-            <View style={styles.divider} />
-
-            <View style={styles.baseStatsWrapper}>
-                <View style={styles.verticalContainer}>
-                    <Text
-                        style={styles.baseStatsText(typesColors[item.types[0]])}
-                    >
-                        ATK
-                    </Text>
-                    <Text
-                        style={styles.baseStatsText(typesColors[item.types[0]])}
-                    >
-                        DEF
-                    </Text>
-                    <Text
-                        style={styles.baseStatsText(typesColors[item.types[0]])}
-                    >
-                        HP
-                    </Text>
-                    <Text
-                        style={styles.baseStatsText(typesColors[item.types[0]])}
-                    >
-                        SATK
-                    </Text>
-                    <Text
-                        style={styles.baseStatsText(typesColors[item.types[0]])}
-                    >
-                        SDEF
-                    </Text>
-                    <Text
-                        style={styles.baseStatsText(typesColors[item.types[0]])}
-                    >
-                        SPD
-                    </Text>
-                </View>
-                <View style={styles.gapper8} />
-                <View style={styles.slimGrayVertical} />
-                <View style={styles.gapper8} />
-
-                {renderStats()}
-                <View style={styles.gapper8} />
-
-                <View style={[styles.verticalContainer, styles.progressBar]}>
-                    <ProgressBarAndroid
-                        styleAttr="Horizontal"
-                        indeterminate={false}
-                        progress={item.stats.attack / 100}
-                        color={typesColors[item.types[0]]}
-                    />
-                    <ProgressBarAndroid
-                        animating={true}
-                        styleAttr="Horizontal"
-                        indeterminate={false}
-                        progress={item.stats.defense / 100}
-                        color={typesColors[item.types[0]]}
-                    />
-                    <ProgressBarAndroid
-                        styleAttr="Horizontal"
-                        indeterminate={false}
-                        progress={item.stats.hp / 100}
-                        color={typesColors[item.types[0]]}
-                    />
-                    <ProgressBarAndroid
-                        styleAttr="Horizontal"
-                        indeterminate={false}
-                        progress={item.stats['special-attack'] / 100}
-                        color={typesColors[item.types[0]]}
-                    />
-                    <ProgressBarAndroid
-                        styleAttr="Horizontal"
-                        indeterminate={false}
-                        progress={item.stats['special-defense'] / 100}
-                        color={typesColors[item.types[0]]}
-                    />
-                    <ProgressBarAndroid
-                        styleAttr="Horizontal"
-                        indeterminate={false}
-                        progress={item.stats.speed / 100}
-                        color={typesColors[item.types[0]]}
-                    />
                 </View>
             </View>
         </View>
@@ -223,6 +246,13 @@ const PokeCard = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingHorizontal: 5,
+        paddingBottom: 5,
+        width: '100%',
+    },
     pokeImage: {
         width: 200,
         height: 200,
@@ -284,17 +314,17 @@ const styles = StyleSheet.create({
         color: '#666666',
     },
     cardContainer: {
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-end',
         alignItems: 'center',
-        width: '96%',
+        // width: '96%',
         // height: 412,
         backgroundColor: 'azure',
-        // borderWidth: 2,
-        // borderColor: 'cadetblue',
+        flex: 0.6,
+
         borderRadius: 8,
-        paddingTop: 50,
+        // paddingTop: 100,
         paddingBottom: 30,
         // marginBottom: 25,
     },
@@ -386,10 +416,11 @@ const styles = StyleSheet.create({
     },
 
     baseStatsWrapper: {
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'row',
-        alignItems: 'flex-start',
-        width: 320,
+        alignItems: 'stretch',
+        width: 'auto',
+        paddingHorizontal: 10,
         // borderWidth: 0.5,
         // borderColor: '#74CB48',
         // height: 100,
