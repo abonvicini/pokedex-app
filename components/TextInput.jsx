@@ -37,13 +37,11 @@ const TextInput = ({
     const handleOnFocus = () => {
         fadeIn();
         setOnFocus(true);
-        console.log(fadeAnim);
     };
 
     const handleOnBlur = () => {
         fadeOut();
         setOnFocus(false);
-        console.log(fadeAnim);
     };
 
     if (isSearchBox) {
