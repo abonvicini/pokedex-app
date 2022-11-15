@@ -6,6 +6,8 @@ import {
     Text,
     TouchableHighlight,
     View,
+    ToastAndroid,
+    Platform,
 } from 'react-native';
 import UserCtx from '../contexts/userCtx';
 import { typesColors } from './PokeCard';
@@ -17,10 +19,15 @@ const MiniCard = ({ item, navigation }) => {
     };
 
     const handleNotLogged = () => {
-        Alert.alert(
-            'No permitido',
-            'Para poder ver los stats de un Pokémon, primero debes logearte',
-        );
+        Platform.OS === 'android'
+            ? ToastAndroid.show(
+                  'Necesitas estar logeado para ver los detalles de un Pokémon',
+                  ToastAndroid.SHORT,
+              )
+            : Alert.alert(
+                  'No permitido',
+                  'Para poder ver los stats de un Pokémon, primero debes logearte',
+              );
     };
 
     return (
