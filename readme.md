@@ -35,3 +35,13 @@ and change the parameter **maxCalls** in the line **12**
 The design system that i used, its from a figma community repository. I will put a link to the design and try to find who is the owner, to give the corresponde credits.
 
 In whereever be the case, this app was only created for study propuse.
+
+## Finally
+
+Yes i know, there is still a lot of things to do in the project, e.g create a "src" folder and put all the modules inside, DRY the code, use more the colors theme, etc.
+
+Anything is valuable for me, so, feel free to make a MR with changes or make me comments with some feedback to improve.
+
+So if you already are here reading this, i appreciate a lot.
+
+Thank you and loads of love. ❤
