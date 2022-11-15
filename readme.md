@@ -1,7 +1,5 @@
 # Pokedex App
 
-### If you are a fan of Pokémon you need this app with you! You can use it to get a full information for every Pokémon in the Pokémon World
-
 ## How to Start
 
 > First off all, you need to get it touch with me, to get the .env with the **credentials** to use my firebase store, or you can use **one of your own**, taking in count the ".env-example" file.
@@ -28,7 +26,7 @@ To get the list of Pokémons for the HomeScreen, i used a recursive fetching tha
 
 and change the parameter **maxCalls** in the line **12**
 
-> Try not to use a number bigger than 906, becouse the is no Pokémon ID existent for that number and therefore the app will crash, at least for now.
+> Try not to use a number bigger than 905, because the is no Pokémon ID existent for that number and therefore the app will crash, at least for now.
 
 ## Disclaimer
 
