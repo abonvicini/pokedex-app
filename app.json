@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "pokedex-app",
+    "name": "abonvicini",
     "slug": "pokedex-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,25 +9,36 @@
     "splash": {
       "image": "./assets/splash-light.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FFFFFF" 
+      "backgroundColor": "#FFFFFF"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/c0018b3d-59c9-43f1-a793-108e754cab78"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.abonvicini.pokedexapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.abonvicini.pokedexapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c0018b3d-59c9-43f1-a793-108e754cab78"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
