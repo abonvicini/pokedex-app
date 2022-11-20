@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
         //Display
         // display: 'flex',
         // marginHorizontal: 5,
-        flex: 0.25,
+        // flex: 1,
+
         flexDirection: 'column',
         alignItems: 'flex-start',
         minWidth: 80,
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
         borderColor: color,
         borderWidth: 1,
         borderRadius: 8,
+        width: 105,
     }),
     headerMiniCard: {
         display: 'flex',

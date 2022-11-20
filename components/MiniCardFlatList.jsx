@@ -20,6 +20,7 @@ const MiniCardFlatList = ({ pokeData, navigation }) => {
     return (
         <View style={styles.container}>
             <FlatList
+                initialNumToRender={30}
                 data={pokeData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.order}
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     separator: {
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
     },
 });
 
