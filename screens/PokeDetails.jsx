@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import Button from '../components/Button';
+import HeaderPokeCard from '../components/HeaderPokeCard';
 import PokeCard, { typesColors } from '../components/PokeCard';
 import { usePokeFetch } from '../hooks/usePokeFetch';
 import { getRandomArbitrary } from '../utils/functions';
@@ -51,22 +52,7 @@ const PokeDetails = ({ route, navigation }) => {
                         typesColors[pokemonInfo.types[0]],
                     )}
                 >
-                    <View style={styles.headerPoke}>
-                        <TouchableWithoutFeedback
-                            onPress={() => navigation.goBack()}
-                        >
-                            <Image
-                                style={styles.arrowImg}
-                                source={require('../img/arrow-leftx4.png')}
-                            />
-                        </TouchableWithoutFeedback>
-                        <Text style={styles.pokeNameText}>
-                            {pokemonInfo.name}
-                        </Text>
-                        <Text style={styles.pokeNumberText}>
-                            #{pokemonInfo.id}
-                        </Text>
-                    </View>
+                    <HeaderPokeCard pokemonInfo={pokemonInfo} />
 
                     <Image
                         style={styles.pokeImage}
@@ -87,10 +73,8 @@ const PokeDetails = ({ route, navigation }) => {
 
     useFocusEffect(
         React.useCallback(() => {
-            // alert('Screen was focused');
             return () => {
                 setRandomPoke(null);
-                // alert(randomPoke);
             };
         }, []),
     );
@@ -103,37 +87,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    pokeNumberText: {
-        color: '#FFF',
-        fontFamily: 'Poppins_700Bold',
-        lineHeight: 20,
-        fontSize: 16,
-        fontStyle: 'normal',
-        textAlign: 'right',
-        textAlignVertical: 'center',
-    },
-    arrowImg: {
-        width: 30,
-        height: 30,
-        alignSelf: 'center',
-        marginRight: 20,
-        zIndex: 5,
-    },
-    headerPoke: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginTop: 40,
-        marginHorizontal: 20,
-    },
-    pokeNameText: {
-        flex: 1,
-        color: '#FFF',
-        fontFamily: 'Poppins_700Bold',
-        lineHeight: 40,
-        fontSize: 30,
-        fontStyle: 'normal',
-        textAlignVertical: 'center',
-    },
+
     randomButton: {
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
         position: 'absolute',
