@@ -23,7 +23,7 @@ import { Feather } from '@expo/vector-icons';
 
 const Separator = () => <View style={styles.separator} />;
 
-const Login = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
     const { user, setUser } = React.useContext(UserCtx);
     const [isVisible, setIsVisible] = React.useState(true);
     const [loading, setLoading] = React.useState(true);
@@ -224,4 +224,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Login;
+export default LoginScreen;

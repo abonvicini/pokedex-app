@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
         borderColor: color,
         borderWidth: 1,
         borderRadius: 8,
-        width: 105,
+        width: '32%',
+        // aspectRatio: 3 / 1,
     }),
     headerMiniCard: {
         display: 'flex',
